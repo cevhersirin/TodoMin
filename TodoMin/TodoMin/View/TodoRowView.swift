@@ -32,7 +32,7 @@ struct TodoRowView: View {
                 })
             }
             
-            TextField("Record Video", text: $todo.task)
+            TextField("Enter the task", text: $todo.task)
                 .strikethrough(todo.isCompleted)
                 .foregroundStyle(todo.isCompleted ? .gray : .primary)
                 .focused($isActive)
