@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ChartData {
+    let id = UUID().uuidString
     var name: String
     var count: Int
+    var type: String = "charData"
 }

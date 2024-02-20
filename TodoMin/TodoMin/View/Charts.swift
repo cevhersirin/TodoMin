@@ -27,6 +27,8 @@ struct Charts: View {
                 LazyVStack(spacing: 20) {
                     Section {
                         ChartView(data: status, isStatus: true)
+                        Spacer()
+                        BarChartView(data: status, isStatus: true)
                     } header: {
                         Text("Task Status")
                             .font(.title2.bold())
@@ -35,6 +37,9 @@ struct Charts: View {
                     }
                     Section {
                         ChartView(data: priority, isStatus: false)
+                        Spacer()
+                        BarChartView(data: priority, isStatus: false)
+                        Spacer()
                     } header: {
                         Text("Task Priorities")
                             .font(.title2.bold())
@@ -44,6 +49,7 @@ struct Charts: View {
                 }
                 .padding(15)
             }
+            .background(.gray.opacity(0.15))
             .navigationTitle("Charts")
         }
     }
@@ -73,6 +79,34 @@ struct Charts: View {
                 .font(.system(size: 40))
         }
         .frame(width: 200, height: 200)
+    }
+    
+    @ViewBuilder
+    func BarChartView(data: [ChartData], isStatus: Bool) -> some View {
+        Chart{
+            
+            ForEach(data, id: \.id) { item in
+                BarMark(
+                    x: .value("Name", item.count),
+                    y: .value("Storage", item.type),
+                    stacking: .center)
+                .annotation(position: .overlay) {
+                    Text("\(item.count)")
+                        .font(.footnote.bold())
+                        .foregroundStyle(.white)
+                }
+                .foregroundStyle(by: .value("Name", item.name))
+                .cornerRadius(8)
+            }
+            
+        }
+        .chartForegroundStyleScale(range: isStatus ? [Color.green.gradient, Color.red.gradient] : [normalPriorityColor.gradient,
+                                                                                                    mediumPriorityColor.gradient,
+                                                                                                    heighPriorityColor.gradient])
+        .padding(.horizontal)
+        .frame(height: 60)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
     }
 }
 
