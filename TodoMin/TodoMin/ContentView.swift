@@ -15,12 +15,10 @@ struct ContentView: View {
             Home()
                 .tag(Tab.home)
                 .tabItem { Tab.home.tabContent }
-                .navigationTitle("Search")
             
             Charts()
                 .tag(Tab.charts)
                 .tabItem { Tab.charts.tabContent }
-                .navigationTitle("Search")
         }
         .tint(.blue)
     }

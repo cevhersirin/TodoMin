@@ -12,6 +12,7 @@
 		D716994B2B85072100D9901D /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716994A2B85072100D9901D /* View+Extensions.swift */; };
 		D716994F2B850F6500D9901D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716994E2B850F6500D9901D /* Colors.swift */; };
 		D71699502B85102200D9901D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716994E2B850F6500D9901D /* Colors.swift */; };
+		D71699522B85387500D9901D /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71699512B85387500D9901D /* ChartData.swift */; };
 		D7647C3D2B6ED1F90083F96C /* TodoMinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7647C3C2B6ED1F90083F96C /* TodoMinApp.swift */; };
 		D7647C3F2B6ED1F90083F96C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7647C3E2B6ED1F90083F96C /* ContentView.swift */; };
 		D7647C412B6ED1FA0083F96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7647C402B6ED1FA0083F96C /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		D71699472B8503A400D9901D /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		D716994A2B85072100D9901D /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		D716994E2B850F6500D9901D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D71699512B85387500D9901D /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		D7647C392B6ED1F90083F96C /* TodoMin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoMin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7647C3C2B6ED1F90083F96C /* TodoMinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoMinApp.swift; sourceTree = "<group>"; };
 		D7647C3E2B6ED1F90083F96C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				D7647C692B6ED31C0083F96C /* Todo.swift */,
 				D71699432B8501CE00D9901D /* Tab.swift */,
+				D71699512B85387500D9901D /* ChartData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				D71699482B8503A400D9901D /* Charts.swift in Sources */,
 				D7647C3D2B6ED1F90083F96C /* TodoMinApp.swift in Sources */,
 				D7647C6D2B6ED4FE0083F96C /* Home.swift in Sources */,
+				D71699522B85387500D9901D /* ChartData.swift in Sources */,
 				D71699442B8501CE00D9901D /* Tab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
