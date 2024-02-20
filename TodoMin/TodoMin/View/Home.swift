@@ -16,18 +16,19 @@ struct Home: View {
     @Environment(\.modelContext) private var context
     @State private var showAll: Bool = false
     var body: some View {
-        List {
-            Section(activeSectionTitle) {
-                ForEach(activeList) {
-                    TodoRowView(todo: $0, shouldReloadWidget: $0 == activeList.first)
+        NavigationStack {
+            ZStack(alignment: .bottom) {
+                List {
+                    Section(activeSectionTitle) {
+                        ForEach(activeList) {
+                            TodoRowView(todo: $0, shouldReloadWidget: $0 == activeList.first)
+                        }
+                    }
+                    
+                    /// Completed List
+                    CompletedTodoList(showAll: $showAll)
                 }
-            }
-            
-            /// Completed List
-            CompletedTodoList(showAll: $showAll)
-        }
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
+                .navigationTitle("Todo List")
                 Button(action: {
                     /// Creating an Empty Todo Task
                     let todo = Todo(task: "", priority: .normal)
@@ -36,8 +37,17 @@ struct Home: View {
                 }, label: {
                     Image(systemName: "plus.circle.fill")
                         .fontWeight(.light)
-                        .font(.system(size: 42))
+                        .font(.system(size: 50))
+                        .shadow(radius: 4, x: 0, y: 4)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.white, lineWidth: 2)
+                                .padding(4)
+                                .opacity(0.5)
+                        )
                 })
+                .padding()
+                
             }
         }
     }

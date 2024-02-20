@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    /// Active Tab
+    @State private var activeTab: Tab = .home
     var body: some View {
-        NavigationStack {
+        TabView(selection: $activeTab) {
             Home()
-                .navigationTitle("Todo List")
+                .tag(Tab.home)
+                .tabItem { Tab.home.tabContent }
+                .navigationTitle("Search")
+            
+            Charts()
+                .tag(Tab.charts)
+                .tabItem { Tab.charts.tabContent }
+                .navigationTitle("Search")
         }
+        .tint(.blue)
     }
 }
 

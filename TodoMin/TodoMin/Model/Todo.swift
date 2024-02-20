@@ -33,11 +33,11 @@ enum Priorty: String, Codable, CaseIterable {
     var color: Color {
         switch self {
         case .normal:
-            return .green
+            return normalPriorityColor
         case .medium:
-            return .yellow
+            return mediumPriorityColor
         case .heigh:
-            return .red
+            return heighPriorityColor
         }
     }
 }
