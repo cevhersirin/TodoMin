@@ -228,8 +228,8 @@
 		D7647C662B6ED2E20083F96C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D7647C692B6ED31C0083F96C /* Todo.swift */,
 				D71699432B8501CE00D9901D /* Tab.swift */,
+				D7647C692B6ED31C0083F96C /* Todo.swift */,
 				D71699512B85387500D9901D /* ChartData.swift */,
 			);
 			path = Model;

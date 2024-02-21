@@ -7,28 +7,32 @@
 
 import SwiftUI
 import Charts
+import SwiftData
 
 struct Charts: View {
+    /// Actiive Todo's
+    @Query(filter: #Predicate<Todo> { !$0.isCompleted }, sort: [SortDescriptor(\Todo.lastUpdated, order: .reverse)], animation: .snappy) private var activeList: [Todo]
+    /// Actiive Todo's
+    @Query(filter: #Predicate<Todo> { $0.isCompleted }, sort: [SortDescriptor(\Todo.lastUpdated, order: .reverse)], animation: .snappy) private var inActiveList: [Todo]
+    /// Model Context
+    @Environment(\.modelContext) private var context
     
-    private var status: [ChartData] = [
-        .init(name: "done", count: 2),
-        .init(name: "undone", count: 9)
-    ]
+    private var activeListCount: Int {
+        return activeList.count
+    }
     
-    private var priority: [ChartData] = [
-        .init(name: "normal", count: 2),
-        .init(name: "medium", count: 4),
-        .init(name: "heigh", count: 5)
-    ]
+    private var inActiveListCount: Int {
+        return inActiveList.count
+    }
     
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 20) {
                     Section {
-                        ChartView(data: status, isStatus: true)
+                        ChartView(data: createActiveListChartData(), isStatus: true)
                         Spacer()
-                        BarChartView(data: status, isStatus: true)
+                        BarChartView(data: createActiveListChartData(), isStatus: true)
                     } header: {
                         Text("Task Status")
                             .font(.title2.bold())
@@ -36,9 +40,9 @@ struct Charts: View {
                             .hSpacing(.leading)
                     }
                     Section {
-                        ChartView(data: priority, isStatus: false)
+                        ChartView(data: createPriorityChartData(), isStatus: false)
                         Spacer()
-                        BarChartView(data: priority, isStatus: false)
+                        BarChartView(data: createPriorityChartData(), isStatus: false)
                         Spacer()
                     } header: {
                         Text("Task Priorities")
@@ -107,6 +111,23 @@ struct Charts: View {
         .frame(height: 60)
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
+    }
+    
+    func createActiveListChartData() -> [ChartData] {
+        var status: [ChartData] = [
+            .init(name: "done", count: inActiveListCount),
+            .init(name: "undone", count: activeListCount)
+        ]
+        return status
+    }
+    
+    func createPriorityChartData() -> [ChartData] {
+        var priority: [ChartData] = [
+            .init(name: "normal", count: 2),
+            .init(name: "medium", count: 4),
+            .init(name: "heigh", count: 5)
+        ]
+        return priority
     }
 }
 
