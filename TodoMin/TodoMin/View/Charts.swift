@@ -10,6 +10,8 @@ import Charts
 import SwiftData
 
 struct Charts: View {
+    /// All Todo's
+    @Query private var allTodoList: [Todo]
     /// Actiive Todo's
     @Query(filter: #Predicate<Todo> { !$0.isCompleted }, sort: [SortDescriptor(\Todo.lastUpdated, order: .reverse)], animation: .snappy) private var activeList: [Todo]
     /// Actiive Todo's
@@ -23,6 +25,21 @@ struct Charts: View {
     
     private var inActiveListCount: Int {
         return inActiveList.count
+    }
+    
+    private var normalCount: Int {
+        let normalList = allTodoList.filter( { $0.priority == .normal } )
+        return normalList.count
+    }
+    
+    private var mediumCount: Int {
+        let mediumList = allTodoList.filter( { $0.priority == .medium } )
+        return mediumList.count
+    }
+    
+    private var heightCount: Int {
+        let heighList = allTodoList.filter( { $0.priority == .heigh } )
+        return heighList.count
     }
     
     var body: some View {
@@ -123,9 +140,9 @@ struct Charts: View {
     
     func createPriorityChartData() -> [ChartData] {
         var priority: [ChartData] = [
-            .init(name: "normal", count: 2),
-            .init(name: "medium", count: 4),
-            .init(name: "heigh", count: 5)
+            .init(name: "normal", count: normalCount),
+            .init(name: "medium", count: mediumCount),
+            .init(name: "heigh", count: heightCount)
         ]
         return priority
     }
