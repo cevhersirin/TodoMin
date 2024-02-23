@@ -16,7 +16,7 @@ struct TodoRowView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.scenePhase) private var phase
     var body: some View {
-        HStack(spacing: 8) {
+        HStack() {
             if !isActive && !todo.task.isEmpty {
                 Button(action: {
                     todo.isCompleted.toggle()
@@ -32,10 +32,28 @@ struct TodoRowView: View {
                 })
             }
             
+            Spacer(minLength: 8)
+            
             TextField("Enter the task", text: $todo.task)
                 .strikethrough(todo.isCompleted)
                 .foregroundStyle(todo.isCompleted ? .gray : Color(uiColor: .activeTodoText))
                 .focused($isActive)
+                .background(
+                        ZStack{
+                        Color.white
+                            if todo.task.count == 0 {
+                                HStack {
+                                    Text("Enter the task")
+                                    .font(.headline)
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                              }
+                             .frame(maxWidth: .infinity)
+                            }
+                        }
+                    )
+            
+            Spacer(minLength: 8)
             
             if !isActive && !todo.task.isEmpty {
                 /// Priority Menu Button (For Updating)
