@@ -27,7 +27,7 @@ struct Home: View {
     
     @State private var showAll: Bool = false
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack(alignment: .bottom) {
                 List {
                     Section(activeSectionTitle) {
@@ -74,29 +74,24 @@ struct Home: View {
                 .listStyle(.plain)
                 .listRowSeparator(.hidden)
                 .navigationTitle("Todo List")
-                Button(action: {
-                    /// Creating an Empty Todo Task
-                    let todo = Todo(task: "", priority: .normal)
-                    /// Saving item into context
-                    context.insert(todo)
-                }, label: {
-                    Image(systemName: "plus.circle.fill")
-                        .renderingMode(.template)
-                        .foregroundColor(appTint)
-                        .fontWeight(.light)
-                        .font(.system(size: 50))
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 25)
-                                .stroke(Color.white, lineWidth: 2)
-                                .padding(4)
-                                .opacity(0.5)
-                        )
-                })
-                .padding()
-                
             }
             .background(backgroundColor)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        /// Creating an Empty Todo Task
+                        let todo = Todo(task: "", priority: .normal)
+                        /// Saving item into context
+                        context.insert(todo)
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(appTint)
+                            .fontWeight(.light)
+                            .font(.system(size: 25))
+                    })
+                }
+            }
         }
     }
     

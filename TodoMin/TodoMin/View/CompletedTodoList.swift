@@ -31,6 +31,7 @@ struct CompletedTodoList: View {
         } header: {
             HStack {
                 Text("Completed")
+                    .font(.subheadline.bold())
                 
                 Spacer(minLength: 0)
                 
