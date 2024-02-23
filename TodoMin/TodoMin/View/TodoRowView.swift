@@ -34,7 +34,7 @@ struct TodoRowView: View {
             
             TextField("Enter the task", text: $todo.task)
                 .strikethrough(todo.isCompleted)
-                .foregroundStyle(todo.isCompleted ? .gray : .primary)
+                .foregroundStyle(todo.isCompleted ? .gray : Color(uiColor: .activeTodoText))
                 .focused($isActive)
             
             if !isActive && !todo.task.isEmpty {
@@ -58,7 +58,8 @@ struct TodoRowView: View {
                 }
             }
         }
-        .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
+        .frame(height: 40)
+        .listRowInsets(.init(top: 8, leading: 16, bottom: 8, trailing: 16))
         .animation(.snappy, value: isActive)
         .onAppear{
             isActive = todo.task.isEmpty

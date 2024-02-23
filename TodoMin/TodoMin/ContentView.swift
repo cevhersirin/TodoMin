@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tag(Tab.charts)
                 .tabItem { Tab.charts.tabContent }
         }
-        .tint(.blue)
+        .tint(appTint)
     }
 }
 

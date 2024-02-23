@@ -131,7 +131,7 @@ struct Charts: View {
     }
     
     func createActiveListChartData() -> [ChartData] {
-        var status: [ChartData] = [
+        let status: [ChartData] = [
             .init(name: "done", count: inActiveListCount),
             .init(name: "undone", count: activeListCount)
         ]
@@ -139,7 +139,7 @@ struct Charts: View {
     }
     
     func createPriorityChartData() -> [ChartData] {
-        var priority: [ChartData] = [
+        let priority: [ChartData] = [
             .init(name: "normal", count: normalCount),
             .init(name: "medium", count: mediumCount),
             .init(name: "heigh", count: heightCount)

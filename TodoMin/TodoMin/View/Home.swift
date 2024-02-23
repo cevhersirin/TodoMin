@@ -14,6 +14,17 @@ struct Home: View {
     @Query(filter: #Predicate<Todo> { !$0.isCompleted }, sort: [SortDescriptor(\Todo.lastUpdated, order: .reverse)], animation: .snappy) private var activeList: [Todo]
     /// Model Context
     @Environment(\.modelContext) private var context
+    /// Detect Color Scheme
+    @Environment(\.colorScheme) var colorScheme
+    
+    var rowBackgroundColor: Color {
+        return colorScheme == .dark ? .white : .white
+    }
+    
+    var rowShadowColor: Color {
+        return colorScheme == .dark ? .clear : Color(uiColor: .lightGray)
+    }
+    
     @State private var showAll: Bool = false
     var body: some View {
         NavigationStack {
@@ -22,12 +33,46 @@ struct Home: View {
                     Section(activeSectionTitle) {
                         ForEach(activeList) {
                             TodoRowView(todo: $0, shouldReloadWidget: $0 == activeList.first)
+                                .listRowBackground(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .background(.clear)
+                                        .foregroundColor(rowBackgroundColor)
+                                        .padding(
+                                            EdgeInsets(
+                                                top: 2,
+                                                leading: 10,
+                                                bottom: 5,
+                                                trailing: 10
+                                            )
+                                        )
+                                        .shadow(color: rowShadowColor.opacity(0.3),
+                                                radius: 10, x: 0, y: 1)
+                                )
+                                .listRowSeparator(.hidden)
                         }
                     }
                     
                     /// Completed List
                     CompletedTodoList(showAll: $showAll)
+                        .listRowBackground(
+                            RoundedRectangle(cornerRadius: 10)
+                                .background(.clear)
+                                .foregroundColor(rowBackgroundColor)
+                                .padding(
+                                    EdgeInsets(
+                                        top: 2,
+                                        leading: 10,
+                                        bottom: 5,
+                                        trailing: 10
+                                    )
+                                )
+                                .shadow(color: rowShadowColor.opacity(0.3),
+                                        radius: 10, x: 0, y: 1)
+                        )
+                        .listRowSeparator(.hidden)
                 }
+                .listStyle(.plain)
+                .listRowSeparator(.hidden)
                 .navigationTitle("Todo List")
                 Button(action: {
                     /// Creating an Empty Todo Task
@@ -36,6 +81,8 @@ struct Home: View {
                     context.insert(todo)
                 }, label: {
                     Image(systemName: "plus.circle.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(appTint)
                         .fontWeight(.light)
                         .font(.system(size: 50))
                         .shadow(radius: 4, x: 0, y: 4)
@@ -49,6 +96,7 @@ struct Home: View {
                 .padding()
                 
             }
+            .background(backgroundColor)
         }
     }
     
